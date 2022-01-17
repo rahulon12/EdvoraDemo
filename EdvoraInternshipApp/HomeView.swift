@@ -48,7 +48,19 @@ struct HomeView: View {
             .task {
                 await dataManager.fetchData()
             }
+            .refreshable {
+                await dataManager.fetchData()
+            }
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        Task.init {
+                            await dataManager.fetchData()
+                        }
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if dataManager.dataIsFetched {
                         Menu {
